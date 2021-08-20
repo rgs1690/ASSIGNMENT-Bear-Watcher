@@ -2,7 +2,6 @@ import '../styles/main.scss';
 import 'bootstrap';
 
 const bearArray = [];
-
 const renderToDom = (divId, textToRender) => {
   const selectedDiv = document.querySelector(divId);
   selectedDiv.innerHTML = textToRender;
@@ -24,25 +23,54 @@ const formCreator = () => {
 `;
   renderToDom('#bearForm', domString);
 };
+const fishTimeTracker = () => {
+  let domString = '';
+  domString += new Date();
+  renderToDom('#caughtDisplay', domString);
+};
+const timeTracker = () => {
+  let domString = '';
+  domString += new Date();
+  renderToDom('#attemptDisplay', domString);
+};
+const fishCatcher = () => {
+  let count = 0;
+  count += 1;
+  renderToDom('#totalDisplay', count);
+};
 
 const bearCreator = (array) => {
   let domString = '';
   array.forEach((bear, i) => {
     domString += `
-  <div class="card" style="width: 18rem;">
+  <div id="bearCard" class="card" style="width: 18rem;">
   <img src=${bear.url} class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">${bear.name}</h5>
-    <button type="button" id=${i} class="btn btn-primary">Attempted to Catch Fish</button>
-    <button type="button" id=${i} class="btn btn-primary">Caught a Fish!</button>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <button type="button" id='fishAttempt--${i}' class="btn btn-primary">Attempted to Catch Fish</button>
+    <button type="button" id='fishCaught--${i}' class="btn btn-success">Caught a Fish!</button>
+    <div>Attempt to catch Fish:</div>
+    <div id='attemptDisplay'></div>
+    <div>Caught Fish:</div>
+    <div id='caughtDisplay'></div>
+    <div>Total Fish Caught:</div>
+    <div id='totalDisplay'></div>
   </div>
 </div>
   `;
   });
   renderToDom('#river', domString);
 };
-
+const handleBtns = (event) => {
+  event.preventDefault();
+  if (event.target.id.startsWith('fishAttempt')) {
+    timeTracker();
+  }
+  if (event.target.id.startsWith('fishCaught')) {
+    fishCatcher();
+    fishTimeTracker();
+  }
+};
 const submitBtn = (event) => {
   event.preventDefault();
   const bear = {
@@ -55,14 +83,18 @@ const submitBtn = (event) => {
   bearCreator(bearArray);
   document.querySelector('#formBear').reset();
 };
+
 const formEvents = () => {
   const formElement = document.querySelector('#bearForm');
   formElement.addEventListener('submit', submitBtn);
 };
-
+const buttonEvents = () => {
+  document.querySelector('#river').addEventListener('click', handleBtns);
+};
 const init = () => {
   formCreator();
   formEvents();
+  buttonEvents();
 };
 
 init();
