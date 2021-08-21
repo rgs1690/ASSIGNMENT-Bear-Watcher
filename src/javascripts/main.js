@@ -38,7 +38,18 @@ const fishCatcher = () => {
   count += 1;
   renderToDom('#totalDisplay', count);
 };
-
+const handleBtns = (event) => {
+  event.preventDefault();
+  if (event.target.id.startsWith('fishAttempt')) {
+    console.warn(event.target.id);
+    timeTracker();
+  }
+  if (event.target.id.startsWith('fishCaught')) {
+    console.warn(event.target.id);
+    fishCatcher();
+    fishTimeTracker();
+  }
+};
 const bearCreator = (array) => {
   let domString = '';
   array.forEach((bear, i) => {
@@ -47,8 +58,8 @@ const bearCreator = (array) => {
   <img src=${bear.url} class="card-img-top" alt="...">
   <div class="card-body">
     <h5 class="card-title">${bear.name}</h5>
-    <button type="button" id='fishAttempt--${i}' class="btn btn-primary">Attempted to Catch Fish</button>
-    <button type="button" id='fishCaught--${i}' class="btn btn-success">Caught a Fish!</button>
+    <button type="button" id='fishAttempt-${i}' class="btn btn-primary">Attempted to Catch Fish</button>
+    <button type="button" id='fishCaught-${i}' class="btn btn-success">Caught a Fish!</button>
     <div>Attempt to catch Fish:</div>
     <div id='attemptDisplay'></div>
     <div>Caught Fish:</div>
@@ -60,16 +71,11 @@ const bearCreator = (array) => {
   `;
   });
   renderToDom('#river', domString);
-};
-const handleBtns = (event) => {
-  event.preventDefault();
-  if (event.target.id.startsWith('fishAttempt')) {
-    timeTracker();
-  }
-  if (event.target.id.startsWith('fishCaught')) {
-    fishCatcher();
-    fishTimeTracker();
-  }
+  // document.querySelector('#river').addEventListener('click', handleBtns);
+  // const btns = document.querySelectorAll('#river');
+  // btns.forEach((btn) => {
+  //   btn.addEventListener('click', handleBtns);
+  // });
 };
 const submitBtn = (event) => {
   event.preventDefault();
