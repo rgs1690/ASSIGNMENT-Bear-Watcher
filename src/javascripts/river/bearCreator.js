@@ -1,4 +1,5 @@
 import renderToDom from '../bearForm/renderToDom';
+import { bearArray, fishCaught, attemptCatch } from './bearData';
 
 const bearCreator = (array) => {
   let domString = '';
@@ -26,34 +27,33 @@ const bearCreator = (array) => {
   });
   renderToDom('#river', domString);
 };
-//  interpolate caughtdomstring in the div on line 22 and 24
-// const fishTimeTracker = () => {
-//   let domString = '';
-//   domString += new Date();
-//   renderToDom('#caughtDisplay', domString);
-// };
-// const timeTracker = () => {
-//   let domString = '';
-//   domString += new Date();
+//  interpolate caughtdomstring in the div on line 22 and 20
+//  interpolate attemptdomstring in div on line 18
 
-//   renderToDom('#attemptDisplay', domString);
-// };
-// const fishCatcher = () => {
-//   let count = 0;
-//   count += 1;
-//   renderToDom('#totalDisplay', count);
-// };
-// const handleBtns = (event) => {
-//   event.preventDefault();
-//   if (event.target.id.startsWith('fishAttempt')) {
-//     console.warn(event.target.id);
-//     timeTracker();
-//     console.warn(event.target.id);
-//     fishCatcher();
-//     fishTimeTracker();
-//   }
-// };
-// const buttonEvents = () => {
-//   document.querySelector('#river').addEventListener('click', handleBtns);
-// };
-export default bearCreator;
+const attemptTimeTracker = (event) => {
+  const targetId = event.target.id;
+  if (targetId.startsWith('fishAttempt')) {
+    console.warn(event.target.id);
+    const fishAttempt = bearArray.splice(targetId, 1);
+    attemptCatch.push(fishAttempt[0]);
+    fishAttempt.bear.attemptFishTime += Date.now();
+    fishAttempt.bear.attemptedFish += 1;
+  }
+};
+const fishCatcher = (event) => {
+  const targetId = event.target.id;
+  if (targetId.startsWith('fishCaught')) {
+    console.warn(event.target.id);
+    const caughtFish = bearArray.splice(targetId, 1);
+    fishCaught.push(caughtFish[0]);
+    fishCaught.bear.fishCaughtTime += Date.now();
+    fishCaught.bear.fishCaught += 1;
+  }
+};
+
+const buttonEvents = () => {
+  document.querySelector('#river').addEventListener('click', attemptTimeTracker);
+  document.querySelector('#river').addEventListener('click', fishCatcher);
+};
+
+export { bearCreator, buttonEvents };

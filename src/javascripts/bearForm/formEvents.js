@@ -7,7 +7,9 @@ const submitBtn = (event) => {
     name: document.querySelector('#bearName').value,
     url: document.querySelector('#bearUrl').value,
     fishCaught: 0,
-    attemptedFish: 0
+    fishCaughtTime: '',
+    attemptedFish: 0,
+    attemptFishTime: ''
   };
   bearArray.push(bear);
   bearCreator(bearArray);
