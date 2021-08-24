@@ -1,5 +1,5 @@
 import bearArray from '../river/bearData';
-import bearCreator from '../river/river';
+import bearCreator from '../river/bearCreator';
 
 const submitBtn = (event) => {
   event.preventDefault();
