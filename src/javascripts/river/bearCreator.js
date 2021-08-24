@@ -1,7 +1,5 @@
-import { renderToDom } from './bearForm';
+import renderToDom from '../bearForm/renderToDom';
 
-const bearArray = [];
-// create an array for fishCaught and Attempt to catch fish
 const bearCreator = (array) => {
   let domString = '';
   array.forEach((bear, i) => {
@@ -58,4 +56,4 @@ const bearCreator = (array) => {
 // const buttonEvents = () => {
 //   document.querySelector('#river').addEventListener('click', handleBtns);
 // };
-export { bearArray, bearCreator };
+export default bearCreator;
