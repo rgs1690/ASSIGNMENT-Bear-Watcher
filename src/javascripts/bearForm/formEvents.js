@@ -1,4 +1,4 @@
-import bearArray from '../river/bearData';
+import { bearArray } from '../river/bearData';
 import bearCreator from '../river/bearCreator';
 
 const submitBtn = (event) => {
