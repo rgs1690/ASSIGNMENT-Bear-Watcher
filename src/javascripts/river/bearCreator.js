@@ -5,10 +5,10 @@ const filterAttempt = attemptCatch.filter((bear) => bear.attemptedFish);
 const filterAttemptTime = attemptCatch.filter((bear) => bear.attemptFishTime);
 const filterCaughtFish = fishCaught.filter((bear) => bear.fishCaught);
 const filterCaughtFishTime = fishCaught.filter((bear) => bear.attemptFishTime);
-console.warn(filterAttempt);
-console.warn(filterAttemptTime);
-console.warn(filterCaughtFish);
-console.warn(filterCaughtFishTime);
+// console.warn(filterAttempt);
+// console.warn(filterAttemptTime);
+// console.warn(filterCaughtFish);
+// console.warn(filterCaughtFishTime);
 const bearCreator = (array) => {
   let domString = '';
   array.forEach((bear, i) => {
