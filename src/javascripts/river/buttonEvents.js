@@ -12,7 +12,7 @@
 //     attemptCatch[0].attemptedFish += 1;
 //     console.warn(attemptCatch);
 //   }
-// };
+// }
 // const fishCatcher = (event) => {
 //   const targetId = event.target.id;
 //   if (targetId.startsWith('fishCaught')) {
